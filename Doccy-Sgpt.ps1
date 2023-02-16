@@ -1,13 +1,13 @@
-# Wrapper for sgpt --shell mode
+# Wrapper for sgpt without --shell
 # May be the default prefixless at some point
-# May also be moved to Doccy-SgptShell and the search func be relegated to Doccy-Sgpt
+# for --shell, Doccy-Cmd.ps1
 
 if ($Args[0].StartsWith("`"")) # Pased in as "command"
 {
-  sgpt --shell $Args[0]
+  sgpt $Args[0]
 }
 else
 {
   $ArgString = "$Args"
-  sgpt --shell $ArgString
+  sgpt $ArgString
 }

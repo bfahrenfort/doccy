@@ -125,8 +125,25 @@ PrefixlessModule = ${prefixless}
         }
         else
         {
-          $EnabledModules += (Get-Culture).TextInfo.ToTitleCase($module)
-          Write-Doccyfile $DoccyRoot $InstallDir (ConvertTo-StringData($EnabledModules)) $PrefixlessModule
+          # Some modules need to run preinstall tasks before they are enabled
+          $Check = $True
+          $PreEnableScript = "${DoccyRoot}\Doccy-Enable$((Get-Culture).TextInfo.ToTitleCase($module)).ps1"
+          if (Get-Content $PreEnableScript)
+          {
+            $Check = $PreEnableScript | Invoke-Expression
+            Write-Output $Check
+          }
+
+          if ($Check[-1] -eq 0)
+          {
+            $EnabledModules += (Get-Culture).TextInfo.ToTitleCase($module)
+            Write-Doccyfile $DoccyRoot $InstallDir (ConvertTo-StringData($EnabledModules)) $PrefixlessModule
+            Write-Output "doccy: Enable ${module} success."
+          }
+          else
+          {
+            Write-Output "doccy: Enable ${module} failed."
+          }
         }
       }
       else # Wasn't found in the repo under that name

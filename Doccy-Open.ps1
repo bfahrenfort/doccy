@@ -1,8 +1,16 @@
 $DoccyRoot = $MyInvocation.MyCommand.Path | Split-Path -Parent # TODO: this might be fixable
 
 $Config = (Get-Content "$DoccyRoot\Doccy-Open\doccyfile" -Raw) -replace '\\', '\\' | ConvertFrom-StringData
-$SchoolPath = $Config['SchoolPath']
-$Doccyfile = Get-Content "$SchoolPath\Doccy-Open.conf" -Raw
+
+# The path to the document folder you wish to search
+$DocumentPath = $Config['DocumentPath']
+
+# In that folder, create a Doccy-Open.conf with lines in the format:
+# alias = relative/path/to/file.txt
+# And calling `doccy open alias` will open $DocumentPath\relative/path/to/file.txt
+# Because Start-Process uses the registry default program, this will work with any file format
+# I like to use it with .docx
+$Doccyfile = Get-Content "$DocumentPath\Doccy-Open.conf" -Raw
 $DoccyPairs = ConvertFrom-StringData "$Doccyfile"
 
 if (-not $args[0])
@@ -22,7 +30,7 @@ elseif ($args[0] -eq 'help')
 }
 elseif ($args[0] -eq 'add')
 {
-  #Add-Content $SchoolPath\doccyfile 
+  #Add-Content $DocumentPath\doccyfile 
 }
 else
 {
@@ -30,7 +38,7 @@ else
   {
     if ($DoccyPairs.ContainsKey($arg))
     {
-      $str = "{0}\{1}" -f "$SchoolPath", $DoccyPairs[$arg]
+      $str = "{0}\{1}" -f "$DocumentPath", $DoccyPairs[$arg]
       Start-Process $str
     }
     else

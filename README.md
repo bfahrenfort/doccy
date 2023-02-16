@@ -17,9 +17,9 @@ To set the prefixless module, change the module name of the key `PrefixlessModul
 
 ### Modules available
 #### Open
-Open documents by small aliases without ever opening File Explorer. Specify a root document folder in the module's doccyfile (located in its folder in the repo), then create a configuration file (`Doccy-Open.conf`) in the document folder with `alias = relative/path/to/file.docx` or similar. Use with `doccy open alias`.
+`Start-Process` files by small aliases without ever opening File Explorer. Specify a root document folder in the module's doccyfile (located in its folder in the repo), then create a configuration file (`Doccy-Open.conf`) in the document folder with `alias = relative/path/to/file.docx` or similar. Use with `doccy open alias`.
 #### Sgpt
-Run ChatGPT from the command line with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy sgpt "what is a stack?"`
+Chat to ChatGPT from the command line with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy sgpt "what is a stack?"`
 #### Cmd
 Get ChatGPT to create shell commands for you with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy cmd "write a PowerShell command to say 'Hi!'"`. Will run the command if confirmed with `y` on prompt or if passed `-NoConfirm`.
 
@@ -37,7 +37,7 @@ Create a PowerShell script named `Doccy-Enable<name>.ps1` in the repo's root. Wh
 pre-enable tasks should not forcibly install any programs; they should only prompt the user for permission to do so. If admin permission is needed, inform the user and abort in anticipation of a run from an admin shell (no [gsudo](https://github.com/gerardog/gsudo) shenanigans).
 
 #### Examples of multi-useful doccy routines
-* A script that provides an alias for a common program installed on the user's computer called with specific lengthy arguments in much less time.
+* A script that provides an alias to call a common program installed on the user's computer that's usually called with specific lengthy arguments in much less time.
 * A script that lists some features of the user's computer.
 #### Examples of non useful doccy routines
 * A script that opens a game you play frequently.

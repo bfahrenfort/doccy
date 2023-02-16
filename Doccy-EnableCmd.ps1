@@ -7,7 +7,7 @@ if (pip show shell-gpt)
 }
 else
 {
-  $Confirmation = Read-Host "Doccy-EnableCmd: shell_gpt not found. Should doccy install it?`n[y/N]"
+  $Confirmation = Read-Host "Doccy-EnableCmd: WARN: shell_gpt not found. Should doccy install it?`n[y/N]"
   if ($Confirmation -eq 'y')
   {
     if (pip install shell-gpt)

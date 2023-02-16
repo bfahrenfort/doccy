@@ -25,10 +25,16 @@ Get ChatGPT to create shell commands for you with [shell_gpt](https://github.com
 
 
 ### Extending doccy
-To extend doccy, create a PowerShell script named `Doccy-<name>.ps1` in the repo's root. If it serves a function that's useful to more people than just you, make it configurable with a doccyfile and submit a pull request.
+To extend doccy, create a PowerShell script named `Doccy-<name>.ps1` in the repo's root which will be called with all following command line arguments when running `doccy <name> [args]`. 
+
+Handle these arguments however you like. doccy routines should be documented clearly.
+
+If it serves a function that's useful to more people than just you, make it configurable with a doccyfile and submit a pull request.
 
 #### Running pre-enable tasks
 Create a PowerShell script named `Doccy-Enable<name>.ps1` in the repo's root. When enabling your module, this script will be run. Your script should return 0 if the module may be successfully enabled, or 1 if the module should not be enabled.
+
+pre-enable tasks should not forcibly install any programs; they should only prompt the user for permission to do so. If admin permission is needed, inform the user and abort in anticipation of a run from an admin shell (no [gsudo](https://github.com/gerardog/gsudo) shenanigans).
 
 #### Examples of multi-useful doccy routines
 * A script that provides an alias for a common program installed on the user's computer called with specific lengthy arguments in much less time.

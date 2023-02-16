@@ -2,7 +2,7 @@
 ## A sophisticated, extensible helper-accessor framework for the busy academic.
 ### Problem: I don't like to take my hands off the keyboard, but I'm constantly opening documents and performing other small tasks that take a few seconds longer than necessary.
 * Context: I have access to a shell at all times through the Windows Terminal Quake Mode.
-* Solution: Write a foolishly generic script that's essentially an alias aliaser.
+* Solution: Write a foolishly generic, single-platform script that's essentially an alias aliaser, with very little going for it other than redundancy and triviality.
 
 doccy allows you to access many different helper routines from the same script, complete with their own configuration files and pre-enable checks.
 

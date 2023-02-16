@@ -21,7 +21,7 @@ Open documents by small aliases without ever opening File Explorer. Specify a ro
 #### Sgpt
 Run ChatGPT from the command line with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy sgpt "what is a stack?"`
 #### Cmd
-Get ChatGPT to create shell commands for you with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy cmd "write a PowerShell command to say 'Hi!'"`
+Get ChatGPT to create shell commands for you with [shell_gpt](https://github.com/TheR1D/shell_gpt). `doccy cmd "write a PowerShell command to say 'Hi!'"`. Will run the command if confirmed with `y` on prompt or if passed `-NoConfirm`.
 
 
 ### Extending doccy

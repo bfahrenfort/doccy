@@ -102,13 +102,22 @@ PrefixlessModule = ${prefixless}
   if ($Install)
   {
     Write-Output "Doccy-Install: Installing doccy to $(Convert-Path $InstallDir)..."
+    $OverrideDoccyfile = $True
+    if (Get-Content "$(Convert-Path $InstallDir)\doccyfile")
+    {
+      $OverrideDoccyfile = Read-Host 'Doccy-Install: WARN: doccyfile found in install dir. Overwrite it? [y/N]'
+    }
 
     # Install the script
     Copy-Item $DoccyWrapper -Destination "$InstallDir\$ScriptName.ps1"
 
     # Install the default configuration
-    $Enabled = @('Open')
-    Write-Doccyfile (Convert-Path $DoccyRoot) (Convert-Path $InstallDir) (ConvertTo-StringData($Enabled)) 'Open'
+    if ($OverrideDoccyfile -eq 'y')
+    {
+      Write-Output 'Doccy-Install: Overriding doccyfile...'
+      $Enabled = @('Open')
+      Write-Doccyfile (Convert-Path $DoccyRoot) (Convert-Path $InstallDir) (ConvertTo-StringData($Enabled)) 'Open'
+    }
 
     Write-Output "Doccy-Install: Installed. If -InstallDir was on PATH, you may call doccy. Otherwise, add it to your path.`nSee documentation for usage."
   }

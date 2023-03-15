@@ -137,13 +137,13 @@ PrefixlessModule = ${prefixless}
           # Some modules need to run preinstall tasks before they are enabled
           $Check = $True
           $PreEnableScript = "${DoccyRoot}\Doccy-Enable$((Get-Culture).TextInfo.ToTitleCase($module)).ps1"
-          if (Get-Content $PreEnableScript)
+          if (Test-Path $PreEnableScript -PathType Leaf)
           {
             $Check = $PreEnableScript | Invoke-Expression
             Write-Output $Check
           }
 
-          if ($Check[-1] -eq 0)
+          if ($Check -or ($Check[-1] -eq 0))
           {
             $EnabledModules += (Get-Culture).TextInfo.ToTitleCase($module)
             Write-Doccyfile $DoccyRoot $InstallDir (ConvertTo-StringData($EnabledModules)) $PrefixlessModule

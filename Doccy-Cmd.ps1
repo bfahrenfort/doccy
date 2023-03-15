@@ -18,8 +18,10 @@ else
 {
   $CmdString = "$Cmds"
   $Result = (sgpt --shell $CmdString)[1]
-  
-  if ($NoConfirm -or (Read-Host ("`e[4m${Result}`e[0m: [y/N]") -eq 'y')) # Case insensitive
+  $RunCmd = Read-Host "`e[4m${Result}`e[0m: [y/N]"
+ 
+
+  if ($NoConfirm -or ($RunCmd -eq 'y')) # Case insensitive
   {
     Invoke-Expression "$Result"
   }

@@ -1,4 +1,4 @@
-./**/doccyfile
+**/doccyfile
 
 # Add any scripts you want to ignore here
 Doccy-Services.ps1 # Quick and dirty enabler for my specific custom services
